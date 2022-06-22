@@ -1,38 +1,181 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.homePage-wrapper {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: whitesmoke;
 }
 
-.App-link {
-  color: #61dafb;
+.form-wrapper {
+  background: #171717;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-label {
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.homePage-top {
+  display: flex;
+  flex-direction: row;
+  gap: 35px;
+  align-items: center;
+}
+.homePage-hero {
+  flex: 1;
+  font-size: 45px;
+  font-weight: 600;
+  color: #6F00FF;
+  text-shadow: 2px 2px 2px #26B7CE;
+}
+
+.homePage-logo {
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box {
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin-bottom: 14px;
+  background: rgb(225, 224, 224);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.join-btn {
+  background: #6F00FF;
+  color: whitesmoke;
+  width: 100px;
+  margin-left: auto;
+}
+
+.join-btn:hover {
+  background: #4e01b1;
+}
+
+.create-info {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.create-room {
+  color: #6F00FF;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.create-room:hover {
+  color: #4e01b1;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+footer a {
+  color: #318CE7;
+  text-decoration: none;
+}
+
+/* EditorPage  */
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.left-wrapper {
+  background: #171717;
+  color: whitesmoke;
+  padding: 2px 8px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.left-inner {
+  flex: 1;
+}
+
+.logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  /* justify-content: center; */
+  border-bottom: #360674 1px solid;
+}
+
+.editor-logo {
+  height: 70px;
+}
+
+.editor-logo-text {
+  font-size: 33px;
+}
+
+.client-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.client {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.leave-btn {
+  background: #ce2029;
+  color: whitesmoke;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.copy-btn {
+  background: #6F00FF;
+  color: whitesmoke;
+  transition: all 0.3s ease-in-out;
+}
+
+.copy-btn:hover {
+  background: #4e01b1;
+}
+
+.leave-btn:hover {
+  background: #8f1319;
+}
+
+.CodeMirror {
+  font-size: 17px;
+  min-height: calc(100vh - 20px);
+  padding-top: 10px;
+  line-height: 1.3;
 }
