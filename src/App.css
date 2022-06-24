@@ -173,9 +173,17 @@ footer a {
   background: #8f1319;
 }
 
+.editor-wrapper {
+  position: relative;
+}
+
 .CodeMirror {
+  /* min-height: calc(100vh - 30px); */
+  top: 0;
+  min-height: 800px;
+  overflow: hidden;
+  position: absolute;
   font-size: 17px;
-  min-height: calc(100vh - 20px);
   padding-top: 10px;
   line-height: 1.3;
 }
