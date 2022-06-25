@@ -11,6 +11,7 @@ const EditorPage = () => {
   const location = useLocation()
   const reactNavigator = useNavigate()
   const { roomId } = useParams()
+  const [clients, setClients] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -21,7 +22,11 @@ const EditorPage = () => {
 
       function handleErrors(e) {
         console.log('socket error', e)
-        toast.error('Socket connection failed, try again later')
+        toast.error('Socket connection failed, try again later', {style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }})
         reactNavigator('/')
       }
 
@@ -29,24 +34,38 @@ const EditorPage = () => {
         roomId,
         username: location.state?.username
       });
+      // listening for joined event
+      socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketId }) => {
+        if(username !== location.state.username) {
+           toast.success(`${username} has joined the room.`, {style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          }})
+           console.log(`${username} has joined`);
+        }
+  
+        setClients(clients);
+      })
+
+      // listening for disconnected event
+      socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
+        toast.success(`${username} has left the room!`, {icon: '🚀', style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }})
+
+        setClients((prev) => {
+          return prev.filter(client => client.socketId !== socketId)
+        })
+      })
     }
+
 
     init();
   }, [])
 
-  const [clients, setClients] = useState([{
-    socketId: 1,
-    username: "Reetam 1"
-  }, {
-    socketId: 2,
-    username: "John Doe"
-  }, {
-    socketId: 3,
-    username: "Jane Snow"
-  }, {
-    socketId: 4,
-    username: "Kayne Snow"
-  }]);
 
   if(!location.state) {
     return <Navigate to="/" />
