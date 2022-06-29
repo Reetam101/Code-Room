@@ -35,6 +35,19 @@ io.on('connection', (socket) => {
     })
   });
 
+  socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
+    let typing = userSocketMap[socket.id];
+    socket.in(roomId).emit(ACTIONS.CODE_CHANGE, {
+      code,
+      typing
+    })
+  })
+
+  socket.on(ACTIONS.SYNC_CODE, ({ code, socketId }) => {
+    let typing = userSocketMap[socket.id];
+    io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code, typing });
+  })
+
   socket.on('disconnecting', () => {
     const rooms = [...socket.rooms]
     rooms.forEach((roomId) => {
