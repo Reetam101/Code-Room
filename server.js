@@ -35,11 +35,12 @@ io.on('connection', (socket) => {
     })
   });
 
-  socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
+  socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code, lang }) => {
     let typing = userSocketMap[socket.id];
     socket.in(roomId).emit(ACTIONS.CODE_CHANGE, {
       code,
-      typing
+      typing,
+      lang
     })
   })
 

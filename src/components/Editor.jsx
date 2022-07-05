@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/javascript/javascript'
-// import 'codemirror/mode/java/java'
+// import 'codemirror/text'
 import 'codemirror/theme/material-darker.css'
 import 'codemirror/mode/python/python'
 import 'codemirror/addon/edit/closetag'
@@ -11,6 +11,7 @@ import ACTIONS from '../Actions'
 
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
   const editorRef = useRef(null)
+  const [language, setLanguage] = useState('javascript')
   const [typingUser, setTypingUser] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
@@ -28,12 +29,14 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
         // console.log(changes, instance); 
         const { origin } = changes
         const code = instance.getValue()
-        // console.log(code);
+        // console.log(instance);
+        const lang = instance.options.mode.name;
         onCodeChange(code);
         if(origin !== 'setValue') {
           socketRef.current.emit(ACTIONS.CODE_CHANGE, {
             roomId,
             code,
+            lang,
           }) 
         }
       })
@@ -49,9 +52,11 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
   useEffect(() => {
     if(socketRef.current) {
-      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, typing }) => {
+      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, typing, lang }) => {
         if(code !== null) {
           editorRef.current.setValue(code);
+          console.log(lang)
+          if(lang) setLanguage(lang)
           if(!isTyping) {
             setTypingUser(typing);
             setIsTyping(true);
@@ -75,11 +80,28 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     return () => {
       socketRef.current.off(ACTIONS.CODE_CHANGE);
     }
-  }, [socketRef.current])
+  }, [socketRef.current, language, setLanguage])
+
+  useEffect(() => {
+    console.log(editorRef.current.getOption('mode'));
+    editorRef.current.setOption('mode', {
+      name: language,
+      json: true
+    });
+    console.log(language);
+    console.log(editorRef.current.getOption('mode'));
+
+  }, [language, setLanguage])
 
 
   return (
     <>
+      
+      <select onChange={(e) => setLanguage(e.target.value)} name="languages">
+        <option value="javascript">Javascript</option>
+        <option value="python">Python</option>
+        {/* <option value="java">Java</option> */}
+      </select>
       <textarea id="realtime-editor"></textarea>
       {typingUser && isTyping && (
         <span className="display-typing">{typingUser} is typing...</span>    
