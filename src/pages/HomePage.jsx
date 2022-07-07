@@ -50,7 +50,7 @@ const HomePage = () => {
     <div className="homePage-wrapper">
       <div className="form-wrapper">
         <div className="homePage-top">
-          <img className="homePage-logo" src="/coding (1).png" alt="logo" /> 
+          <img className="homePage-logo" src="/coding (2).png" alt="logo" /> 
           <span className="homePage-hero">Code Room</span>
         </div>
         <h4 className="main-label">Paste invitation room ID</h4>

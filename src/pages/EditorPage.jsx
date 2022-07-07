@@ -110,7 +110,7 @@ const EditorPage = () => {
       <div className="left-wrapper">
         <div className="left-inner">
           <div className="logo">
-            <img className="homePage-logo editor-logo" src="/coding (1).png" alt="logo" /> 
+            <img className="homePage-logo editor-logo" src="/coding (2).png" alt="logo" /> 
             <span className="homePage-hero editor-logo-text">Code Room</span>
           </div>
             {/* <img src="/coding (1).png" alt="code room" /> */}

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/javascript/javascript'
-// import 'codemirror/text'
 import 'codemirror/theme/material-darker.css'
 import 'codemirror/mode/python/python'
 import 'codemirror/addon/edit/closetag'
@@ -30,13 +29,12 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
         const { origin } = changes
         const code = instance.getValue()
         // console.log(instance);
-        const lang = instance.options.mode.name;
+        // const lang = instance.options.mode.name;
         onCodeChange(code);
         if(origin !== 'setValue') {
           socketRef.current.emit(ACTIONS.CODE_CHANGE, {
             roomId,
             code,
-            lang,
           }) 
         }
       })
@@ -52,11 +50,9 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
   useEffect(() => {
     if(socketRef.current) {
-      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, typing, lang }) => {
+      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code, typing }) => {
         if(code !== null) {
           editorRef.current.setValue(code);
-          console.log(lang)
-          if(lang) setLanguage(lang)
           if(!isTyping) {
             setTypingUser(typing);
             setIsTyping(true);
@@ -100,7 +96,6 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
       <select onChange={(e) => setLanguage(e.target.value)} name="languages">
         <option value="javascript">Javascript</option>
         <option value="python">Python</option>
-        {/* <option value="java">Java</option> */}
       </select>
       <textarea id="realtime-editor"></textarea>
       {typingUser && isTyping && (

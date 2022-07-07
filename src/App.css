@@ -29,7 +29,7 @@
 }
 .homePage-hero {
   flex: 1;
-  font-size: 45px;
+  font-size: 43px;
   font-weight: 600;
   color: #6F00FF;
   text-shadow: 2px 2px 2px #26B7CE;
@@ -37,7 +37,7 @@
 
 .homePage-logo {
   height: 80px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .input-group {
@@ -130,7 +130,7 @@ footer a {
 }
 
 .editor-logo {
-  height: 70px;
+  height: 75px;
 }
 
 .editor-logo-text {
