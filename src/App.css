@@ -188,3 +188,25 @@ footer a {
   font-size: smaller;
   padding: 10px 8px;
 }
+
+@media screen and (max-width: 480px) {
+  .main-wrapper {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    font-size: 10px;
+  }
+  .editor-logo {
+    display: none;
+  }
+
+  .editor-logo-text {
+    font-size: 30px;
+  }
+
+  .leave-btn {
+    font-size: 15px;
+  }
+  .copy-btn {
+    font-size: 15px;
+  }
+}
